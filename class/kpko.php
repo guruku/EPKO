@@ -2,8 +2,6 @@
 require_once "core.php";
 
 class kpko extends core{
-
-
     // get
     public function getcalon($calon){
         if ($calon == "ketua"){
@@ -28,36 +26,43 @@ class kpko extends core{
         return $this->read_query_escape($query,$data);
     }
 
+    //sigin
+    public function signup($nis,$username,$password){
+        $password = password_hash($password, PASSWORD_DEFAULT);
+        $this->table = "users";
+        $value = "?,?,?,?,?";
+        $data = ['',$nis,$username,$password,1];
+        return $this->insert($value,$data);
+    }
 
+    public function gettoken(){
+        $token = md5(uniqid(rand(), true));
+        $_SESSION['token'] = $token;
+        return $token;
+    }
 
-    // public function getprofile($id){
-    //     try{
-    //         $query = "SELECT siswa.name,siswa.kelas,calons.nis_siswa,calons.visi,calons.misi FROM siswa,calons WHERE (siswa.nis = calons.nis_siswa) AND calons.id = ?";
-    //         $result = $this->connection->prepare($query);
-    //         $result->execute([$id]);
-    //         $result = $result->fetchAll();
-    //         return $result;
-    //     }
-    //     catch (PDOException $e){
-    //         echo "Koneksi Error :".$e->getMessage();
-    //         $this->error = "Gagal untuk mendapatkan data calons";
-    //     }
-    // }
+    //login
 
-    // public function getconfirm($ketua,$wakilketua){
-    //     try{
-    //         $query = "SELECT siswa.name,siswa.kelas,calons.nis_siswa FROM siswa,calons WHERE (siswa.nis = calons.nis_siswa) AND calons.id IN(?,?) ORDER BY jabatan ASC";
-    //         $result = $this->connection->prepare($query);
-    //         $result->execute([$ketua,$wakilketua]);
-    //         $result = $result->fetchAll();
-    //         return $result;
-    //     }
-    //     catch (PDOException $e){
-    //         echo "Koneksi Error :".$e->getMessage();
-    //         $this->error = "Gagal untuk mendapatkan data calons";
-    //     }
-    // }
-
+    public function signin($usernis,$password){
+        $query = "SELECT * FROM users WHERE username = ? or nis_siswa = ?";
+        $result = $this->connection->prepare($query);
+        $result->execute([$usernis,$usernis]);
+        $getdata = $result->fetchAll();
+        if($result->rowCount() > 0){
+            $verify = password_verify($password, $getdata[0]['password']);
+            if($verify == true){
+                return true;
+            }
+            else{
+                $this->error = "Password yang anda masukan salah :)";
+                return false;
+            }
+        }
+        else{
+            $this->error = "NIS / Username tidak terdaftar";
+            return false;
+        }
+    }
 }
 
 

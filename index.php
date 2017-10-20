@@ -8,7 +8,6 @@ $calonwakilketua = $kpko->getcalon("wakilketua");
 $no = 1;
 
 ?>
-        
         <main class="container">
 
         <div class="kpko">

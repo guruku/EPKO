@@ -14,17 +14,16 @@ require_once ("class/kpko.php");
 <body>
 <div class="login">
     <h2>Sign In EPKO</h2>
-    <form action="">
-        <input class="input" type="text" placeholder="Username">
-        <input class="input" type="text" placeholder="Password">
-        <button class="button">Login</button>
-    </form>
+        <input class="input" type="text" placeholder="Username" id="input-username">
+        <input class="input" type="password" placeholder="Password" id="input-password">
+        <button class="button" onclick="signin()">Login</button>
     <br>
     <small>*mengalami masalah? hubungi panitia.</small>
 </div>
 <div class="login-alert">
     <p>NIS atau password yang anda masukan salah.</p>
 </div>
+<script src="assets/js/login.js"></script>
 </body>
 </html>
 <?php 

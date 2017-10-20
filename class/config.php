@@ -15,6 +15,7 @@ class dbconfig{
         try{
             $this->connection = new PDO("mysql:host=".$this->host.";dbname=".$this->dbname,$this->user,$this->pass);
             $this->connection->setAttribute(PDO::ATTR_ERRMODE,PDO::ERRMODE_EXCEPTION);
+            session_start();
         }
         catch (PDOExceptio $e){
             // echo "Koneksi Error :".$e->getMessage();
