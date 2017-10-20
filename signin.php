@@ -1,5 +1,10 @@
 <?php 
 require_once ("class/kpko.php");
+
+if($kpko->ceklogin_users() == true){
+    header('location: index.php');
+}
+
 ?>
 
 <!DOCTYPE html>
@@ -17,6 +22,7 @@ require_once ("class/kpko.php");
         <input class="input" type="text" placeholder="Username" id="input-username">
         <input class="input" type="password" placeholder="Password" id="input-password">
         <button class="button" onclick="signin()">Login</button>
+        <button class="button" onclick="location.href='signup.php'">Signup</button>
     <br>
     <small>*mengalami masalah? hubungi panitia.</small>
 </div>

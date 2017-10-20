@@ -15,10 +15,16 @@
         <nav>
             <ul>
                 <li>
-                    <a href="">Tutorial</a>
-                </li>
+                    <a href="">KPKO 2017</a>
+
                 <li>
                     <a href="">About</a>
+                </li>
+                <li style="float:right">
+                    <a href="class/logout.php">Logout</a>
+                </li>
+                <li style="float:right">
+                    <a href="">Hello, <?php echo $_SESSION['users_username'] ?></a>
                 </li>
             </ul>    
         </nav>

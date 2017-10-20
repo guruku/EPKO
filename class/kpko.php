@@ -51,6 +51,9 @@ class kpko extends core{
         if($result->rowCount() > 0){
             $verify = password_verify($password, $getdata[0]['password']);
             if($verify == true){
+                $_SESSION['users_nis'] = $getdata[0]['nis_siswa'];
+                $_SESSION['users_username'] = $getdata[0]['username'];
+                $_SESSION['users_level'] = $getdata[0]['level'];
                 return true;
             }
             else{
@@ -62,6 +65,27 @@ class kpko extends core{
             $this->error = "NIS / Username tidak terdaftar";
             return false;
         }
+    }
+
+    public function ceklogin_users(){
+        if((isset($_SESSION['users_nis'])) && (isset($_SESSION['users_username'])) && (isset($_SESSION['users_level']))){
+            if($_SESSION['users_level'] == 1){
+                return true;
+            }
+            else{
+                return false;
+            }
+        }
+        else{
+            return false;
+        }
+    }
+
+    //logout
+
+    public function logout(){
+        session_unset();
+        session_destroy();
     }
 }
 

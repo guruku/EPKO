@@ -2,11 +2,14 @@
 require_once ("class/kpko.php");
 require_once ("template/header.php");
 
+if($kpko->ceklogin_users() !== true){
+    header('location: signin.php');
+}
+
 $calonketua = $kpko->getcalon("ketua");
 $calonwakilketua = $kpko->getcalon("wakilketua");
 
 $no = 1;
-
 ?>
         <main class="container">
 

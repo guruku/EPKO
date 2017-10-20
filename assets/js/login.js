@@ -22,7 +22,7 @@ function signup(){
 }
 
 function insertSignup(){
-    var param = "token="+ inputToken.value +"&nis="+ inputNis.value +"&username="+ inputUsername.value+"&password="+inputPassword.value;
+    var param = "token="+ inputToken.value +"&nis="+ inputNis.value +"&username="+ inputUsername.value+"&password="+inputPassword.value+"&recaptcha="+grecaptcha.getResponse();
     var xhttp = new XMLHttpRequest();
     xhttp.open("POST", "class/signup.php", true);
     xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
@@ -35,6 +35,7 @@ function insertSignup(){
         }
         else{
             alert(dataJSON.message);
+            location.href = "signup.php";
         }
       }
     };

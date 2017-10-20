@@ -11,7 +11,7 @@ $token = $kpko->gettoken();
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Login</title>
     <link rel="stylesheet" href="assets/css/login.css">
-    <!-- <script src='https://www.google.com/recaptcha/api.js'></script> -->
+    <script src='https://www.google.com/recaptcha/api.js'></script>
 </head>
 <body>
 <div class="login">
@@ -21,8 +21,11 @@ $token = $kpko->gettoken();
         <input class="input" type="text" placeholder="Username" id="input-username">
         <input class="input" type="password" placeholder="Password" id="input-password">
         <input class="input" type="password" placeholder="Re-type Password" id="input-retypepassword">
+        <br>
+        <div class="g-recaptcha" data-sitekey="6LceQzUUAAAAAKwNJIYTsKN4U-Yujk7Pk8CGmUkl"></div>
+        <br>
         <button class="button" onclick="signup()">Signup</button>
-    <!-- <div class="g-recaptcha" data-sitekey="6Le7GjUUAAAAALlbF5Mflluq9jp37CZ3QsNfZ62I"></div> -->
+        <button class="button" onclick="location.href='signin.php'">Login</button>
     <br>
     <small>*mengalami masalah? hubungi panitia.</small>
 </div>
