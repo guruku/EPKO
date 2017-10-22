@@ -25,7 +25,7 @@ $token = $kpko->gettoken();
         <input type="hidden" value="<?php echo $_SESSION['token'] ?>" id="input-token">
         <input class="input" type="text" placeholder="Username" id="input-username">
         <input class="input" type="password" placeholder="Password" id="input-password">
-        <button class="button btn-aqua" onclick="signin()">Sign In</button>
+        <button class="button btn-aqua"  style="width:100%;margin-bottom:10px;"  onclick="signin()">Sign In</button>
     <br>
     <p class="to-action">Belum mempunyai akun?</p>
     <button class="button btn-grass btn-action" onclick="location.href='signup.php'">Sign Up</button>
@@ -39,7 +39,7 @@ $token = $kpko->gettoken();
 
 <div class="modal" id="modal-alert">
         <div class="modal-content" id="">
-            <h3 class="modal-title">Alert</h3>
+            <h3 class="modal-title" id="title-alert">Alert</h3>
             <p id="alert-content"></p>
             <div id="btn-closemodal">
                 <button class="button confirm-cancel btn-bitter" onclick="closeModal();">Ok</button>

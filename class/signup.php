@@ -33,7 +33,7 @@ if(isset($_POST['token'])){
     if($token == $_SESSION['token']){
         if(post_captcha($recaptcha)['success'] == true){
             if($kpko->signup($nis,$username,$password) == true){
-                $status = ['status'=>'true','message'=>'signup berhasil, klik ok untuk lanjut login'];
+                $status = ['status'=>'true','message'=>'signup berhasil, Loading...'];
             }
             else{
                 $status = ['status'=>'false','message'=>'gagal, nis tidak terdaftar / nis yang dimasukan sudah pernah mendaftar'];

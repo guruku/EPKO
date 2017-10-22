@@ -8,7 +8,7 @@ class admin extends core{
 
     public function getsiswa($search){
         $this->table = "siswa";
-        $where = "WHERE nis LIKE ? OR name LIKE ?";
+        $where = "WHERE nis LIKE ? OR name LIKE ? limit 10";
         $data = ['%'.$search.'%','%'.$search.'%'];
         return $this->read($where,$data);
     }

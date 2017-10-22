@@ -26,6 +26,13 @@ class kpko extends core{
         return $this->read_query_escape($query,$data);
     }
 
+    public function getsiswa($nis){
+        $this->table = "siswa";
+        $where = "WHERE nis = ?";
+        $data = [$nis];
+        return $this->read($where,$data);
+    }
+
     //sigin
     public function signup($nis,$username,$password){
         $password = password_hash($password, PASSWORD_DEFAULT);

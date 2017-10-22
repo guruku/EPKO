@@ -1,0 +1,35 @@
+[22-Oct-2017 11:48:40 UTC] PHP Warning:  Cannot modify header information - headers already sent by (output started at /home/dunr2911/public_html/osistel.com/template/header.php:30) in /home/dunr2911/public_html/osistel.com/index.php on line 6
+[22-Oct-2017 11:48:40 UTC] PHP Fatal error:  Uncaught exception 'PDOException' with message 'SQLSTATE[42000]: Syntax error or access violation: 1064 You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near '' at line 1' in /home/dunr2911/public_html/osistel.com/class/kpko.php:98
+Stack trace:
+#0 /home/dunr2911/public_html/osistel.com/class/kpko.php(98): PDO->query('SELECT * FROM r...')
+#1 /home/dunr2911/public_html/osistel.com/index.php(9): kpko->insertsuara_check()
+#2 {main}
+  thrown in /home/dunr2911/public_html/osistel.com/class/kpko.php on line 98
+[22-Oct-2017 11:48:54 UTC] PHP Warning:  Cannot modify header information - headers already sent by (output started at /home/dunr2911/public_html/osistel.com/template/header.php:30) in /home/dunr2911/public_html/osistel.com/index.php on line 6
+[22-Oct-2017 11:48:54 UTC] PHP Fatal error:  Uncaught exception 'PDOException' with message 'SQLSTATE[42000]: Syntax error or access violation: 1064 You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near '' at line 1' in /home/dunr2911/public_html/osistel.com/class/kpko.php:98
+Stack trace:
+#0 /home/dunr2911/public_html/osistel.com/class/kpko.php(98): PDO->query('SELECT * FROM r...')
+#1 /home/dunr2911/public_html/osistel.com/index.php(9): kpko->insertsuara_check()
+#2 {main}
+  thrown in /home/dunr2911/public_html/osistel.com/class/kpko.php on line 98
+[22-Oct-2017 11:49:01 UTC] PHP Warning:  Cannot modify header information - headers already sent by (output started at /home/dunr2911/public_html/osistel.com/template/header.php:30) in /home/dunr2911/public_html/osistel.com/index.php on line 6
+[22-Oct-2017 11:49:01 UTC] PHP Fatal error:  Uncaught exception 'PDOException' with message 'SQLSTATE[42000]: Syntax error or access violation: 1064 You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near '' at line 1' in /home/dunr2911/public_html/osistel.com/class/kpko.php:98
+Stack trace:
+#0 /home/dunr2911/public_html/osistel.com/class/kpko.php(98): PDO->query('SELECT * FROM r...')
+#1 /home/dunr2911/public_html/osistel.com/index.php(9): kpko->insertsuara_check()
+#2 {main}
+  thrown in /home/dunr2911/public_html/osistel.com/class/kpko.php on line 98
+[22-Oct-2017 11:49:23 UTC] PHP Warning:  Cannot modify header information - headers already sent by (output started at /home/dunr2911/public_html/osistel.com/template/header.php:30) in /home/dunr2911/public_html/osistel.com/index.php on line 6
+[22-Oct-2017 11:49:23 UTC] PHP Fatal error:  Uncaught exception 'PDOException' with message 'SQLSTATE[42000]: Syntax error or access violation: 1064 You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near '' at line 1' in /home/dunr2911/public_html/osistel.com/class/kpko.php:98
+Stack trace:
+#0 /home/dunr2911/public_html/osistel.com/class/kpko.php(98): PDO->query('SELECT * FROM r...')
+#1 /home/dunr2911/public_html/osistel.com/index.php(9): kpko->insertsuara_check()
+#2 {main}
+  thrown in /home/dunr2911/public_html/osistel.com/class/kpko.php on line 98
+[22-Oct-2017 11:50:03 UTC] PHP Warning:  Cannot modify header information - headers already sent by (output started at /home/dunr2911/public_html/osistel.com/template/header.php:30) in /home/dunr2911/public_html/osistel.com/index.php on line 6
+[22-Oct-2017 11:50:03 UTC] PHP Fatal error:  Uncaught exception 'PDOException' with message 'SQLSTATE[42000]: Syntax error or access violation: 1064 You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near '' at line 1' in /home/dunr2911/public_html/osistel.com/class/kpko.php:98
+Stack trace:
+#0 /home/dunr2911/public_html/osistel.com/class/kpko.php(98): PDO->query('SELECT * FROM r...')
+#1 /home/dunr2911/public_html/osistel.com/index.php(9): kpko->insertsuara_check()
+#2 {main}
+  thrown in /home/dunr2911/public_html/osistel.com/class/kpko.php on line 98

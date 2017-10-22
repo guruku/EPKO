@@ -10,9 +10,12 @@ var modalAlert = document.getElementById('modal-alert');
 var alertContent = document.getElementById('alert-content');
 
 var btnCloseModal = document.getElementById('btn-closemodal');
+
+var titleAlert = document.getElementById('title-alert');
 // signup
 function signup(){
     if(inputNis.value == "" || inputUsername.value == "" || inputPassword.value =="" || inputRetypePassword.value == ""){
+        titleAlert.innerHTML = "Alert";
         alertContent.innerHTML = "Mohon dilengkapi :D";
         alertModal();
     }
@@ -21,6 +24,7 @@ function signup(){
             insertSignup()
         }
         else{
+            titleAlert.innerHTML = "Alert";
             alertContent.innerHTML = "Konfirmasi password tidak sama :(";
             alertModal();
         }
@@ -36,6 +40,7 @@ function insertSignup(){
       if (this.readyState == 4 && this.status == 200) {
         dataJSON = JSON.parse(this.responseText);
         if(dataJSON.status == 'true'){
+            titleAlert.innerHTML = "Alert";
             alertContent.innerHTML = dataJSON.message;
             btnCloseModal.style.display = "none";
             alertModal();
@@ -45,6 +50,7 @@ function insertSignup(){
            
         }
         else{
+            titleAlert.innerHTML = "Alert";
             alertContent.innerHTML = dataJSON.message;
             btnCloseModal.style.display = "none";
             alertModal();
@@ -61,6 +67,7 @@ function insertSignup(){
 
 function signin(){
     if(inputUsername.value == "" || inputPassword.value ==""){
+        titleAlert.innerHTML = "Alert";
         alertContent.innerHTML = "Mohon dilengkapi :D";
         alertModal();
     }
@@ -78,6 +85,7 @@ function requestLogin(){
       if (this.readyState == 4 && this.status == 200) {
         dataJSON = JSON.parse(this.responseText);
         if(dataJSON.status == 'true'){
+            titleAlert.innerHTML = "Alert";
             alertContent.innerHTML = "Loading..";
             btnCloseModal.style.display = "none";
             alertModal();
@@ -86,6 +94,7 @@ function requestLogin(){
             },1000);
         }
         else{
+            titleAlert.innerHTML = "Alert";
             alertContent.innerHTML = dataJSON.message;
             alertModal();
         }
@@ -103,5 +112,28 @@ function closeModal(){
     modalAlert.style.display = "none";
 }
 
+//cek nis
+
+function cekNis(){
+    if(inputNis.value !== ""){
+        var xmlhttp = new XMLHttpRequest();
+        xmlhttp.onreadystatechange = function() {
+            if (this.readyState == 4 && this.status == 200) {
+                dataJSON = JSON.parse(this.responseText);
+                if(dataJSON.length > 0){
+                    titleAlert.innerHTML = "Cek NIS";
+                    alertContent.innerHTML = "<p>"+dataJSON[0].name+"</p><p>"+dataJSON[0].kelas+"</p>";
+                    alertModal()
+                }
+                else{
+                    alertContent.innerHTML = "NIS tidak ditemukan";
+                    alertModal()
+                }
+            }
+        };
+        xmlhttp.open("GET", "class/ceknis.php?nis="+inputNis.value, true);
+        xmlhttp.send();
+    }
+}
 
 

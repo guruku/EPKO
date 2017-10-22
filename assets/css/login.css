@@ -49,6 +49,14 @@ body{
     margin-right: 20px;
 }
 
+#input-nis{
+    width: 75%;
+    display: inline;
+}
+#cek-nis{
+    display: inline;
+}
+
 /* aula cloud */
 #ts-aula{
     width: 50%;
