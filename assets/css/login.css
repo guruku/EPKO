@@ -179,3 +179,24 @@ body{
 #btn-closemodal{
     display: block;
 }
+
+/* mobile phone */
+@media screen and (max-width: 480px) {
+    #ts-aula{
+        width:80%;
+    }
+
+    #cloud-1{
+        top: 210px;
+        left: 7px;
+    }
+    
+    #cloud-2{
+        top: 222px;
+        right: 36px;
+    }
+    
+    #cloud-3,#cloud-4{
+        display: none;
+    }
+}

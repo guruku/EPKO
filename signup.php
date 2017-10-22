@@ -31,6 +31,11 @@ $token = $kpko->gettoken();
         <button class="button btn-aqua btn-action" onclick="location.href='signin.php'">Sign In</button>
     <br>
 </div>
+<img src="assets/img/ts_aula.png" alt="" id="ts-aula">
+<img src="assets/img/cloud1.png" alt="" id="cloud-1">
+<img src="assets/img/cloud2.png" alt="" id="cloud-2">
+<img src="assets/img/cloud3.png" alt="" id="cloud-3">
+<img src="assets/img/cloud4.png" alt="" id="cloud-4">
 <div class="modal" id="modal-alert">
         <div class="modal-content" id="">
             <h3 class="modal-title">Alert</h3>

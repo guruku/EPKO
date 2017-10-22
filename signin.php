@@ -35,7 +35,6 @@ $token = $kpko->gettoken();
 <img src="assets/img/cloud2.png" alt="" id="cloud-2">
 <img src="assets/img/cloud3.png" alt="" id="cloud-3">
 <img src="assets/img/cloud4.png" alt="" id="cloud-4">
-<div></div>
 </body>
 
 <div class="modal" id="modal-alert">
