@@ -35,6 +35,7 @@ class kpko extends core{
         return $this->insert($value,$data);
     }
 
+    //token
     public function gettoken(){
         $token = md5(uniqid(rand(), true));
         $_SESSION['token'] = $token;
@@ -81,12 +82,36 @@ class kpko extends core{
         }
     }
 
+
+    //send suara
+
+    public function insertsuara($nis_ketua,$nis_wakilketua){
+        $this->table = "result";
+        $value = "?,?,?,?";
+        $data = ['',$_SESSION['users_nis'],$nis_ketua,$nis_wakilketua];
+        return $this->insert($value,$data);
+    }
+
+    public function insertsuara_check(){
+        $nis =  $_SESSION['users_nis'];
+        $query = "SELECT * FROM result WHERE nis_users = ".$nis;
+        $result = $this->connection->query($query);
+        $result->execute();
+        if ($result->rowCount() > 0) {
+             return true;
+        }
+        else{
+            return false;
+        }
+    }
+
     //logout
 
     public function logout(){
         session_unset();
         session_destroy();
     }
+    
 }
 
 

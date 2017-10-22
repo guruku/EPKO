@@ -1,7 +1,14 @@
 // init
+var navContent = document.getElementById('nav-content');
+
 var modalProfile = document.getElementById('modal-profile');
 var modalConfirm = document.getElementById('modal-confirm');
 
+var modalAlert = document.getElementById('modal-alert');
+var alertContent = document.getElementById('alert-content');
+var alertTitlte = document.getElementById('alert-title');
+
+var btnCloseModal = document.getElementById('btn-closemodal');
 
 var profileName = document.getElementById('profile-name');
 var profileNis = document.getElementById('profile-nis');
@@ -16,6 +23,20 @@ var cKelasKetua = document.getElementById('confirm-kelas-ketua');
 var cNameWakilKetua = document.getElementById('confirm-name-wakilketua');
 var cNisWakilKetua = document.getElementById('confirm-nis-wakilketua');
 var cKelasWakilKetua = document.getElementById('confirm-kelas-wakilketua');
+
+var inputToken = document.getElementById('input-token');
+
+//menu
+
+function navMenu(){
+    if(navContent.style.display == "block"){
+        navContent.style.display = "none";
+    }
+    else{
+        navContent.style.display = "block";
+    }
+    console.log('test');
+}
 
 //  get
 
@@ -80,19 +101,64 @@ modalConfirm.style.display = "block";
 function closeModal(){
 modalProfile.style.display = "none";
 modalConfirm.style.display = "none";
+modalAlert.style.display = "none";
+}
+
+function alertModal(){
+    modalAlert.style.display = "block";
 }
 
 //send
 
-function send(){
+function confirmsend(){
 nisKetua = document.querySelector('input[name="ketua"]:checked');
 nisWakilKetua = document.querySelector('input[name="wakil-ketua"]:checked');
 
 if(!nisKetua || !nisWakilKetua){
-    alert('Mohon gunakan hak pilih anda :D');
+    alertContent.innerHTML = "Gunakan hak suara anda :D";
+    alertModal();
 }
 else{
-    showModalConfirm(nisKetua,nisWakilKetua);        
+    showModalConfirm(nisKetua,nisWakilKetua);
 }
 
+}
+
+function insertsuara(){
+
+    nisKetua = document.querySelector('input[name="ketua"]:checked');
+    nisWakilKetua = document.querySelector('input[name="wakil-ketua"]:checked');
+
+    var param = "nis_ketua="+nisKetua.value+"&nis_wakilketua="+nisWakilKetua.value+"&token="+inputToken.value;
+    var xhttp = new XMLHttpRequest();
+    xhttp.open("POST", "class/insertsuara.php", true);
+    xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+    xhttp.onreadystatechange = function() {
+      if (this.readyState == 4 && this.status == 200) {
+        dataJSON = JSON.parse(this.responseText);
+        if(dataJSON.status == 'true'){
+            alertContent.innerHTML = dataJSON.message;
+            btnCloseModal.style.display = "none";
+            alertModal();
+            setTimeout(function(){
+                location.href = "success.php";
+            },1000);
+        }
+        else{
+            alertContent.innerHTML = dataJSON.message;
+            btnCloseModal.style.display = "none";
+            alertModal();
+            setTimeout(function(){
+                location.href = "signin.php";
+            },1000);
+        }
+      }
+    };
+    xhttp.send(param);
+}
+
+//nav
+function about(){
+    alertContent.innerHTML = "Copyright 2017 PTIK | JondesCode, more info : 082199066627, @haffjjj";
+    alertModal();
 }

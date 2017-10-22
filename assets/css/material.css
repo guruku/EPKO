@@ -1,0 +1,80 @@
+/* btn */
+
+.btn-grape{
+    background-color: #e44a6b;
+}
+.btn-grape:hover{
+    background-color: #bb2546;
+}
+
+.btn-bitter{
+    background-color: #f76b59;
+}
+.btn-bitter:hover{
+    background-color: #cc6052;
+}
+
+.btn-sun{
+    background-color: #f1c34f;
+}
+.btn-sun:hover{
+    background-color: #c59d3e;
+}
+
+.btn-grass{
+    background-color: #6ed466;
+}
+.btn-grass:hover{
+    background-color: #5db956;
+}
+
+.btn-mint{
+    background-color: #45dba2;
+}
+.btn-mint:hover{
+    background-color: #35a77b;
+}
+
+.btn-aqua{
+    background-color: #45b8db;
+}
+.btn-aqua:hover{
+    background-color: #3c99b6;
+}
+
+.btn-lavender{
+    background-color: #ad4eda;
+}
+.btn-lavender:hover{
+    background-color: #7d379e;
+}
+
+.btn-pink{
+    background-color: #e763bd;
+}
+.btn-pink:hover{
+    background-color: #bd3d94;
+}
+
+/* button */
+.button{
+    border-radius: 5px;
+    border: 0px;
+    color: white;
+    padding: 10px;
+    cursor: pointer;
+}
+
+/* input */
+.input{
+    border-radius: 5px;
+    padding:10px;
+    border:none;
+    border:2px solid #F0F0F0
+}
+
+.container{
+    padding:15px;
+}
+
+/* jondes v00.1 */

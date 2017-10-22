@@ -9,7 +9,8 @@ $token = $kpko->gettoken();
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Login</title>
+    <title>Signup</title>
+    <link rel="stylesheet" href="assets/css/material.css">    
     <link rel="stylesheet" href="assets/css/login.css">
     <script src='https://www.google.com/recaptcha/api.js'></script>
 </head>
@@ -24,13 +25,18 @@ $token = $kpko->gettoken();
         <br>
         <div class="g-recaptcha" data-sitekey="6LceQzUUAAAAAKwNJIYTsKN4U-Yujk7Pk8CGmUkl"></div>
         <br>
-        <button class="button" onclick="signup()">Signup</button>
-        <button class="button" onclick="location.href='signin.php'">Login</button>
+        <button class="button btn-grass" onclick="signup()">Sign Up</button>
+        <br>
+        <p class="to-action">Sudah mempunyai akun?</p>
+        <button class="button btn-aqua btn-action" onclick="location.href='signin.php'">Sign In</button>
     <br>
-    <small>*mengalami masalah? hubungi panitia.</small>
 </div>
-<div class="login-alert">
-    <p>NIS atau password yang anda masukan salah.</p>
+<div class="modal" id="modal-alert">
+        <div class="modal-content" id="">
+            <h3 class="modal-title">Alert</h3>
+            <p id="alert-content"></p>
+            <button id="btn-closemodal" class="button confirm-cancel btn-bitter" onclick="closeModal();">Ok</button>
+        </div>
 </div>
 <script src="assets/js/login.js"></script>
 </body>

@@ -6,13 +6,19 @@ if($kpko->ceklogin_users() !== true){
     header('location: signin.php');
 }
 
+if($kpko->insertsuara_check() == true){
+    header('location: success.php');
+}
+
+$token = $kpko->gettoken();
+
 $calonketua = $kpko->getcalon("ketua");
 $calonwakilketua = $kpko->getcalon("wakilketua");
 
 $no = 1;
 ?>
         <main class="container">
-
+    
         <div class="kpko">
             <div class="ketua">
 
@@ -26,17 +32,17 @@ $no = 1;
                     <div class="calon">
                         <div class="calon-no"><?php echo $no ?></div>
                         <div style=" background-image: url('assets/img/calon/1.jpg');" class="calon-img"></div>
-                        <h3 class="calon-name">
+                        <h4 class="calon-name">
                         <?php 
-                            if (strlen($value['name']) > 15) {
-                                echo substr($value['name'],0,14).".";
+                            if (strlen($value['name']) > 14) {
+                                echo substr($value['name'],0,13).".";
                             }
                             else{
                                 echo $value['name'];
                             }
                         ?>
-                        </h3>
-                        <button class="button button-profile" id="<?php echo $value['nis_siswa'] ?>" onclick="showModalProfile('ketua',this.id)">profile</button>
+                        </h4>
+                        <button class="button btn-grass" id="<?php echo $value['nis_siswa'] ?>" onclick="showModalProfile('ketua',this.id)">Profile</button>
                         <input class="input-radio" type="radio" value="<?php echo $value['nis_siswa'] ?>" name="ketua">
                     </div>
                     <?php $no++ ?>
@@ -59,17 +65,17 @@ $no = 1;
                     <div class="calon">
                         <div class="calon-no"><?php echo $no ?></div>
                         <div style=" background-image: url('assets/img/calon/1.jpg');" class="calon-img"></div>
-                        <h3 class="calon-name">
+                        <h4 class="calon-name">
                         <?php 
-                            if (strlen($value['name']) > 15) {
-                                echo substr($value['name'],0,14).".";
+                            if (strlen($value['name']) > 14) {
+                                echo substr($value['name'],0,13).".";
                             }
                             else{
                                 echo $value['name'];
                             }
                         ?>
-                        </h3>
-                        <button class="button button-profile" id="<?php echo $value['nis_siswa'] ?>" onclick="showModalProfile('wakilketua',this.id)">profile</button>
+                        </h4>
+                        <button class="button btn-grass" id="<?php echo $value['nis_siswa'] ?>" onclick="showModalProfile('wakilketua',this.id)">Profile</button>
                         <input class="input-radio" type="radio" value="<?php echo $value['nis_siswa'] ?>" name="wakil-ketua">
                     </div>
                     <?php $no++ ?>
@@ -79,14 +85,13 @@ $no = 1;
             </div>
         </div>
         <div class="button-send">
-            <button class="button send" onclick="send()">Kirim Suara</button>
+            <button class="button btn-aqua" onclick="confirmsend()">Kirim Suara</button>
         </div>
         </main>
 
     <div class="modal" id="modal-profile">
         <div class="modal-content">
             <h3 class="modal-title">Profile</h3>
-            <span class="button" id="button-close" onclick="closeModal();">&times;</span>
             <table class="modal-table">
                 <tr>
                     <td>Nama</td>
@@ -115,6 +120,7 @@ $no = 1;
                 </tr>
                 
             </table>
+            <button class="button confirm-cancel btn-bitter" onclick="closeModal();">Close</button>            
         </div>
     </div>
 
@@ -139,6 +145,7 @@ $no = 1;
                     <td id="confirm-kelas-ketua">Loading..</td>
                 </tr>
             </table>
+            <br>
             <h4>Wakil Ketua</h4>
             <table class="modal-table">
                 <tr>
@@ -157,11 +164,19 @@ $no = 1;
                     <td id="confirm-kelas-wakilketua">Loading..</td>
                 </tr>
             </table>
-            <button class="button confirm-send" id="kirimsuara">Kirim Suara</button>
-            <button class="button confirm-cancel" onclick="closeModal();">Batal</button>
+            <br>
+            <input type="hidden" id="input-token" value="<?php echo $token ?>">
+            <button class="button confirm-send btn-aqua" id="kirimsuara" onclick="insertsuara()">Kirim Suara</button>
+            <button class="button confirm-cancel btn-bitter" onclick="closeModal();">Batal</button>
         </div>
     </div>
-
+    <div class="modal" id="modal-alert">
+        <div class="modal-content" id="">
+            <h3 class="modal-title" id="alert-title">Alert</h3>
+            <p id="alert-content"></p>
+            <button id="btn-closemodal" class="button confirm-cancel btn-bitter" onclick="closeModal();">Ok</button>
+        </div>
+    </div>
     <script src="assets/js/main.js"></script>
 
 <?php 
