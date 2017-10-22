@@ -317,6 +317,38 @@ footer{
 
 /* mobile phone */
 
+
+/* pre h */
+
+#pre{
+    margin:15px auto 15px auto;
+    padding:10px;
+    width:50%;;
+    background-color:rgb(255, 255, 255);
+    border-radius:5px;
+    color:#353535;
+}
+
+#pre h2{
+    text-align: center;
+    color:#1f1f1f;
+    margin-bottom: 20px;
+}
+#pre table tr td{
+    padding: 5px;
+}
+#pre table{
+    margin-top: 10px;
+    margin-bottom: 10px;
+    border:2px solid rgb(206, 206, 206);
+    border-radius: 5px;
+}
+#pre p{
+    margin-top:10px;
+    margin-bottom:10px;
+}
+
+
 @media screen and (max-width: 480px) {
     #nav-content{
         display: none;
@@ -359,7 +391,7 @@ footer{
     .title h3{
         font-size: 16px;
     }
-    .terimakasih{
+    .terimakasih,#pre{
         width: 90%;
     }
 }

@@ -23,7 +23,7 @@ $token = $kpko->gettoken();
 <div class="login">
     <h2>Sign In EPKO</h2>
         <input type="hidden" value="<?php echo $_SESSION['token'] ?>" id="input-token">
-        <input class="input" type="text" placeholder="Username" id="input-username">
+        <input class="input" type="text" placeholder="NIS / Username" id="input-username">
         <input class="input" type="password" placeholder="Password" id="input-password">
         <button class="button btn-aqua"  style="width:100%;margin-bottom:10px;"  onclick="signin()">Sign In</button>
     <br>

@@ -85,7 +85,7 @@ function requestLogin(){
       if (this.readyState == 4 && this.status == 200) {
         dataJSON = JSON.parse(this.responseText);
         if(dataJSON.status == 'true'){
-            titleAlert.innerHTML = "Alert";
+            titleAlert.innerHTML = "Sukses";
             alertContent.innerHTML = "Loading..";
             btnCloseModal.style.display = "none";
             alertModal();
