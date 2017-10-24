@@ -33,13 +33,34 @@ class kpko extends core{
         return $this->read($where,$data);
     }
 
-    //sigin
+    //SigUp
     public function signup($nis,$username,$password){
         $password = password_hash($password, PASSWORD_DEFAULT);
+        if (!empty($_SERVER['HTTP_CLIENT_IP'])) {
+            $ip = $_SERVER['HTTP_CLIENT_IP'];
+        } elseif (!empty($_SERVER['HTTP_X_FORWARDED_FOR'])) {
+            $ip = $_SERVER['HTTP_X_FORWARDED_FOR'];
+        } else {
+            $ip = $_SERVER['REMOTE_ADDR'];
+        }
         $this->table = "users";
-        $value = "?,?,?,?,?";
-        $data = ['',$nis,$username,$password,1];
+        $value = "?,?,?,?,?,?";
+        $data = ['',$nis,$username,$password,1,$ip];
         return $this->insert($value,$data);
+    }
+
+    public function ceknisusers($nis){
+        $this->table = "users";
+        $where = "WHERE nis_siswa = ?";
+        $data = [$nis];
+        return $this->read_row($where,$data);
+    }
+
+    public function cekusernameusers($username){
+        $this->table = "users";
+        $where = "WHERE username = ?";
+        $data = [$username];
+        return $this->read_row($where,$data);
     }
 
     //token
@@ -49,7 +70,7 @@ class kpko extends core{
         return $token;
     }
 
-    //login
+    //SignIn
 
     public function signin($usernis,$password){
         $query = "SELECT * FROM users WHERE username = ? or nis_siswa = ?";

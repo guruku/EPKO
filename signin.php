@@ -46,7 +46,7 @@ $token = $kpko->gettoken();
             </div>
         </div>
 </div>
-<script src="assets/js/login.js"></script>
+<script src="assets/js/login2.js"></script>
 </html>
 <?php 
 ?>

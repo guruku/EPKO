@@ -30,6 +30,6 @@ function alertModal(){
 
 //nav
 function about(){
-    alertContent.innerHTML = "Copyright 2017 PTIK | JondesCode | Supported By JOSSHOSTING, more info : 082199066627, @haffjjj";
+    alertContent.innerHTML = "Copyright 2017 PTIK | JondesCode | Supported By Ondool95, Jagongan Anak Gaul, CP : 082199066627 WA / @haffjjj";
     alertModal();
 }

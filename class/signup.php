@@ -30,22 +30,48 @@ if(isset($_POST['token'])){
     $password = $_POST['password'];
     $recaptcha = $_POST['recaptcha'];
 
-    if($token == $_SESSION['token']){
-        if(post_captcha($recaptcha)['success'] == true){
-            if($kpko->signup($nis,$username,$password) == true){
-                $status = ['status'=>'true','message'=>'signup berhasil, Loading...'];
+    $ceknisusers = $kpko->ceknisusers($nis);
+    $cekusernameusers = $kpko->cekusernameusers($username);
+
+    // cek nis
+    if($ceknisusers == 0){
+    if($cekusernameusers == 0){
+        // token
+        if($token == $_SESSION['token']){
+            //captcha
+            if(post_captcha($recaptcha)['success'] == true){
+
+                if($kpko->signup($nis,$username,$password) == true){
+                    $status = ['status'=>'true','message'=>'signup berhasil, Loading...'];
+                }
+                else{
+                    $status = ['status'=>'false','message'=>'Pendaftaran Gagal,'];
+                }
+
             }
+
             else{
-                $status = ['status'=>'false','message'=>'gagal, nis tidak terdaftar / nis yang dimasukan sudah pernah mendaftar'];
+                $status = ['status'=>'false','message'=>'Signup gagal, Catptcha tidak valid'];
             }
+            // end captcha
         }
         else{
-            $status = ['status'=>'false','message'=>'signup gagal, Catptcha tidak valid'];
+            $status = ['status'=>'false','message'=>'Signup gagal, token tidak valid'];
         }
+        // end token
     }
     else{
-        $status = ['status'=>'false','message'=>'signup gagal, token tidak valid'];
+        $status = ['status'=>'false','message'=>'Signup gagal, Username tidak tersedia'];
     }
+    }
+    else{
+        $status = ['status'=>'false','message'=>'Signup gagal, NIS sudah didaftarkan'];
+    }
+    // end username
+
+
+    // end nis
     echo json_encode($status,true);
 }
 ?>
+

@@ -36,24 +36,25 @@ function insertSignup(){
     var xhttp = new XMLHttpRequest();
     xhttp.open("POST", "class/signup.php", true);
     xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+
+    alertContent.innerHTML = "Loading..";
+    titleAlert.innerHTML = "Alert";
+    alertModal();
+
     xhttp.onreadystatechange = function() {
       if (this.readyState == 4 && this.status == 200) {
         dataJSON = JSON.parse(this.responseText);
         if(dataJSON.status == 'true'){
-            titleAlert.innerHTML = "Alert";
             alertContent.innerHTML = dataJSON.message;
             btnCloseModal.style.display = "none";
-            alertModal();
             setTimeout(function(){
                 location.href = "signin.php";
             },1000);
            
         }
         else{
-            titleAlert.innerHTML = "Alert";
             alertContent.innerHTML = dataJSON.message;
             btnCloseModal.style.display = "none";
-            alertModal();
             setTimeout(function(){
                 location.href = "signup.php";
             },2000);
@@ -81,22 +82,24 @@ function requestLogin(){
     var xhttp = new XMLHttpRequest();
     xhttp.open("POST", "class/signin.php", true);
     xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+
+    alertContent.innerHTML = "Loading..";
+    titleAlert.innerHTML = "Alert";
+    btnCloseModal.style.display = "none";
+    alertModal();
+    
     xhttp.onreadystatechange = function() {
       if (this.readyState == 4 && this.status == 200) {
         dataJSON = JSON.parse(this.responseText);
         if(dataJSON.status == 'true'){
-            titleAlert.innerHTML = "Sukses";
-            alertContent.innerHTML = "Loading..";
-            btnCloseModal.style.display = "none";
-            alertModal();
+            alertContent.innerHTML = "Sukses..";
             setTimeout(function(){
                 location.href = "index.php";
             },1000);
         }
         else{
-            titleAlert.innerHTML = "Alert";
+            btnCloseModal.style.display = "block";
             alertContent.innerHTML = dataJSON.message;
-            alertModal();
         }
       }
     };
@@ -120,10 +123,11 @@ function cekNis(){
         xmlhttp.onreadystatechange = function() {
             if (this.readyState == 4 && this.status == 200) {
                 dataJSON = JSON.parse(this.responseText);
+                titleAlert.innerHTML = "Cek NIS";
+                alertContent.innerHTML = "Loading..";
+                alertModal()
                 if(dataJSON.length > 0){
-                    titleAlert.innerHTML = "Cek NIS";
                     alertContent.innerHTML = "<p>"+dataJSON[0].name+"</p><p>"+dataJSON[0].kelas+"</p>";
-                    alertModal()
                 }
                 else{
                     alertContent.innerHTML = "NIS tidak ditemukan";

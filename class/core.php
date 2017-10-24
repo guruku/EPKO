@@ -70,6 +70,19 @@ class core extends dbconfig{
         }
     }
 
+    public function read_row($where,$data){
+        try{
+            $query = "SELECT * FROM $this->table $where";
+            $result = $this->connection->prepare($query);
+            $result->execute($data);
+            return $result->rowCount();
+        }
+        catch (PDOException $e){
+            // echo "Koneksi Error :".$e->getMessage();
+            $this->error = "Gagal untuk mendapatkan data";
+            return false;
+        }
+    }
     // child core method
     public function read($where,$data){
         $query = "SELECT * FROM $this->table $where";

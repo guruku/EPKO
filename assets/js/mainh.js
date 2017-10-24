@@ -68,6 +68,9 @@ function showModalConfirm(nisKetua,nisWakilKetua){
 confirmKetua = function(nis){
     var xmlhttp = new XMLHttpRequest();
     xmlhttp.onreadystatechange = function() {
+        cNameKetua.innerHTML = "Loading..";
+        cNisKetua.innerHTML = "Loading..";
+        cKelasKetua.innerHTML = "Loading..";
         if (this.readyState == 4 && this.status == 200) {
             dataProfile = JSON.parse(this.responseText);
             cNameKetua.innerHTML = dataProfile[0].name;
@@ -82,6 +85,9 @@ confirmKetua = function(nis){
 confirmWakilKetua = function(nis){
     var xmlhttp = new XMLHttpRequest();
     xmlhttp.onreadystatechange = function() {
+        cNameWakilKetua.innerHTML = "Loading..";
+        cNisWakilKetua.innerHTML = "Loading..";
+        cKelasWakilKetua.innerHTML = "Loading..";
         if (this.readyState == 4 && this.status == 200) {
             dataProfile = JSON.parse(this.responseText);
             cNameWakilKetua.innerHTML = dataProfile[0].name;
@@ -137,14 +143,17 @@ function insertsuara(){
       if (this.readyState == 4 && this.status == 200) {
         dataJSON = JSON.parse(this.responseText);
         if(dataJSON.status == 'true'){
+            alertContent.innerHTML = "Loading.."
+            alertModal();
             alertContent.innerHTML = dataJSON.message;
             btnCloseModal.style.display = "none";
-            alertModal();
             setTimeout(function(){
                 location.href = "success.php";
             },1000);
         }
         else{
+            alertContent.innerHTML = "Loading.."
+            alertModal();
             alertContent.innerHTML = dataJSON.message;
             btnCloseModal.style.display = "none";
             alertModal();

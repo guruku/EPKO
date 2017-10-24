@@ -44,7 +44,7 @@ $token = $kpko->gettoken();
             <button id="btn-closemodal" class="button confirm-cancel btn-bitter" onclick="closeModal();">Ok</button>
         </div>
 </div>
-<script src="assets/js/login.js"></script>
+<script src="assets/js/login2.js"></script>
 </body>
 </html>
 <?php 
