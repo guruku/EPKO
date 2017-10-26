@@ -21,7 +21,8 @@ class admin extends core{
 
     public function getusers(){
         $query = "SELECT users.id,users.nis_siswa,siswa.name,siswa.kelas,users.username from users, siswa where users.nis_siswa = siswa.nis";
-        return $this->read_query($query);
+        $data = null;
+        return $this->read_query($query,$data);
     }
 
     public function getcalon($calon){
@@ -31,7 +32,8 @@ class admin extends core{
         else if ($calon == "wakilketua") {
             $query = "SELECT calon_wakilketua.id,calon_wakilketua.imgpath,calon_wakilketua.nis_siswa,siswa.name,siswa.kelas,calon_wakilketua.visi,calon_wakilketua.misi from calon_wakilketua, siswa where calon_wakilketua.nis_siswa = siswa.nis;";
         }
-        return $this->read_query($query);
+        $data = null;
+        return $this->read_query($query,$data);
     }
 
     public function getresult(){
@@ -117,13 +119,29 @@ class admin extends core{
         return $this->delete($id);
     }
 
-    // rekap
+    // pagging
 
-    // public function getcountcalon($nis){
-    //     $data = $this->table = $resutl;
-    //     $count = count($data);
-    //     return $data;
-    // }
+    public $rows;
+
+    public function getrows($table){
+        $this->table = $table;
+        $rows = $this->rows;
+        $where = "WHERE 1";
+        $data = null;
+        return  ceil($this->read_count($where,$data)/$this->rows);
+    }
+
+    public function pagging($page,$table){
+        $start = ($page-1)*$this->rows;
+        if($page == 1){
+            $start = 0;
+        }
+        $end = $this->rows;
+
+        $this->table = $table;
+        $where = "WHERE 1";
+        return $this->read_limit($where,$start,$end);
+    }
 }
 
 $admin = new admin();

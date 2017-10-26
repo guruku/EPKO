@@ -37,6 +37,8 @@ var updateKelas = document.getElementById('update-kelas');
 
 var updatePassword = document.getElementById('update-password'); 
 
+var pageContent = document.getElementById('page-content');
+
 //end INIT
 
 //modal
@@ -155,7 +157,7 @@ function deleteSiswa(id){
             else{
                 alert(dataJSON.message);            
             }
-            tableSiswa();
+            // tableSiswa();
           }
         };
         xhttp.send(param);
@@ -295,9 +297,28 @@ function inputSearchSiswa(){
     xmlhttp.send();
 }
 
+//rows
+
+function getrowstable(data){
+    var xmlhttp = new XMLHttpRequest();
+    xmlhttp.onreadystatechange = function() {
+        if (this.readyState == 4 && this.status == 200) {
+            dataRows = JSON.parse(this.responseText);
+            if (dataRows.length > 0){
+                for (var index = 1; index <= dataRows.length; index++) {
+                    pageContent.innerHTML += '<a onclick="tableSiswa('+index+')">'+index+'</a> ';
+                }
+            }
+            else{
+            }
+        }
+    };
+    xmlhttp.open("GET", "../class/admin/rows.php?data="+data, true);
+    xmlhttp.send();
+}
 
 // table
-function tableSiswa(){
+function tableSiswa(page){
     var xmlhttp = new XMLHttpRequest();
     xmlhttp.onreadystatechange = function() {
         if (this.readyState == 4 && this.status == 200) {
@@ -316,7 +337,7 @@ function tableSiswa(){
             }
         }
     };
-    xmlhttp.open("GET", "../class/admin/getsiswa.php", true);
+    xmlhttp.open("GET", "../class/admin/pagging.php?page="+page+"&data=siswa", true);
     xmlhttp.send();
 }
 

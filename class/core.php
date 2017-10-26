@@ -53,6 +53,8 @@ class core extends dbconfig{
         }
     }
     
+    
+
     public function readCore($query,$data){
         try{
             $result = $this->connection->prepare($query);
@@ -70,7 +72,7 @@ class core extends dbconfig{
         }
     }
 
-    public function read_row($where,$data){
+    public function read_count($where,$data){
         try{
             $query = "SELECT * FROM $this->table $where";
             $result = $this->connection->prepare($query);
@@ -89,13 +91,34 @@ class core extends dbconfig{
         return $this->readCore($query,$data);
     }
 
-    public function read_query($query){
-        $data = null;
+    public function read_query($query,$data){
         return $this->readCore($query,$data);
     }
 
     public function read_query_escape($query,$data){
         return $this->readCore($query,$data);
     }
-}
+
+    //PAGE
+    public function read_limit($where,$start,$end){
+        try{
+            $query = "SELECT * FROM $this->table $where limit :start , :end";
+            $result = $this->connection->prepare($query);
+            $result->bindValue(':start',$start,PDO::PARAM_INT);
+            $result->bindValue(':end',$end,PDO::PARAM_INT);
+            $result->execute();
+            $rows = [];
+            while($row = $result->fetchAll()){
+                $rows = $row;
+            }
+            return $rows;
+        }
+        catch (PDOException $e){
+            // echo "Koneksi Error :".$e->getMessage();
+            $this->error = "Gagal untuk mendapatkan data";
+            // return $query;
+        }
+        
+    }
+}   
 ?>

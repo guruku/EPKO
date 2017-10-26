@@ -1,5 +1,6 @@
 <?php 
 require_once "admin.php";
     $users = $admin->getusers();
-    echo json_encode($users,true);
+    $data = ['data' => $users];
+    echo json_encode($data,true);
 ?>

@@ -53,14 +53,14 @@ class kpko extends core{
         $this->table = "users";
         $where = "WHERE nis_siswa = ?";
         $data = [$nis];
-        return $this->read_row($where,$data);
+        return $this->read_count($where,$data);
     }
 
     public function cekusernameusers($username){
         $this->table = "users";
         $where = "WHERE username = ?";
         $data = [$username];
-        return $this->read_row($where,$data);
+        return $this->read_count($where,$data);
     }
 
     //token

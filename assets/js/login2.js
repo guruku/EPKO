@@ -121,11 +121,13 @@ function cekNis(){
     if(inputNis.value !== ""){
         var xmlhttp = new XMLHttpRequest();
         xmlhttp.onreadystatechange = function() {
+
+            titleAlert.innerHTML = "Cek NIS";
+            alertContent.innerHTML = "Loading..";
+            alertModal()
+
             if (this.readyState == 4 && this.status == 200) {
                 dataJSON = JSON.parse(this.responseText);
-                titleAlert.innerHTML = "Cek NIS";
-                alertContent.innerHTML = "Loading..";
-                alertModal()
                 if(dataJSON.length > 0){
                     alertContent.innerHTML = "<p>"+dataJSON[0].name+"</p><p>"+dataJSON[0].kelas+"</p>";
                 }

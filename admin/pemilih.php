@@ -14,6 +14,7 @@
         <br>
         <input id="input-nis" class="input" type="text" disabled placeholder="NIS">
         <input id="input-nama" class="input" type="text" disabled placeholder="Name">
+        <input id="input-kelas" class="input" type="text" disabled placeholder="Gender">
         <input id="input-kelas" class="input" type="text" disabled placeholder="Kelas">
         <input id="input-username" class="input" type="text" placeholder="Username">
         <input id="input-password" class="input" type="text" placeholder="Password">
@@ -25,10 +26,10 @@
 <div class="data">
     <h2>Data</h2>
     <div class="line"></div>
-    <p>Total Data : <span id="total-data"></span>
-    <br>
+    <!-- <p>Total Data : <span id="total-data"></span> -->
+    <!-- <br> -->
     <!-- <p>Total Data : 890 | Kelas 10 : 100 | Kelas 11 : 200 | Kelas 12 : 300</p> -->
-    <br>                
+    <!-- <br>                 -->
     <!-- <div class="filter">
         Filter
         <select class="input" name="" id="">
@@ -43,10 +44,17 @@
         <input class="input" type="text" placeholder="search">
         <button class="input">Search</button>
     </div> -->
-    <table id="table-data"> 
+    <!-- <table id="table-data"> 
 
-    </table>
+    </table> -->
     <!-- <p>Page 1 2 3 4 5 6</p> -->
+    <table id="table" class="display" cellspacing="0" width="100%">
+                <thead>
+                    <tr><th>NIS</th><th>NAMA</th><th>KELAS</th><th>USERNAME</th><th>PASSWORD</th><th>ACTION</th></tr>
+                </thead>
+                <tbody>
+                </tbody>
+    </table>
 </div>
 </div>
 <div id="modal-edit-users" class="modal">
@@ -61,10 +69,37 @@
                 <button class="button" onclick="updateUsers()">Update Data</button>
         </div>
         </div>
-<script>
+
+        <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+        <script src="https://cdn.datatables.net/1.10.16/js/jquery.dataTables.min.js"></script>
+        <script src="https://cdn.datatables.net/1.10.16/js/dataTables.bootstrap.min.js"></script>
+        <script type="text/javascript">
+            $(document).ready(function(){
+                $('#table').DataTable({
+                    "ajax" : "http://localhost/epko/class/admin/getusers.php",
+                    "columns" : [
+                        { "data" : "nis_siswa" },
+                        { "data" : "name" },
+                        { "data" : "kelas" },
+                        { "data" : "username" },
+                        { mRender : 
+                            function () {
+                                    return '***'
+                            }
+                         },
+                        { mRender : 
+                            function (data, type, row) {
+                                    return '<button id='+row[1]+' onclick="()" class="button">Edit</button> <button onclick="deleteSiswa('+row[1]+')" class="button">Delete</button>'
+                            }
+                         }                       
+                    ]
+                });
+            });
+        </script>
+<!-- <script>
 window.onload = function(){
     tableUsers();
 }
-</script>
+</script> -->
 <?php require_once "../template/admin-footer.php" ?>
         

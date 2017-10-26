@@ -8,6 +8,7 @@ if(isset($_GET['search'])){
 }
 else{
     $siswa = $admin->getsiswaall();
-    echo json_encode($siswa,true);
+    $data = ['data' => $siswa];
+    echo json_encode($data);
 }
 ?>
