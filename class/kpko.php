@@ -11,7 +11,8 @@ class kpko extends core{
             $calon = "calon_wakilketua";
         }
         $query = "SELECT $calon.nis_siswa, $calon.imgpath, siswa.name from $calon,siswa where siswa.nis = $calon.nis_siswa;";
-        return $this->read_query($query);
+        $data = null;
+        return $this->read_query($query,$data);
     }
 
     public function getprofile($calon,$nis){
@@ -23,6 +24,7 @@ class kpko extends core{
         }
         $query = "SELECT $calon.nis_siswa, $calon.imgpath, siswa.name, siswa.kelas, $calon.visi, $calon.misi from $calon,siswa where siswa.nis = ? and $calon.nis_siswa = ?";
         $data = [$nis,$nis];
+        // $data = null;        
         return $this->read_query_escape($query,$data);
     }
 

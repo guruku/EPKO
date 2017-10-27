@@ -8,20 +8,20 @@
                     <input id="input-nis" class="input" type="text" placeholder="nis">
                     <input id="input-nama" class="input" type="text" placeholder="name">
                     <select id="input-kelas" class="input" name="kelas">
-                        <option value="10">X</option>
-                        <option value="11">XI</option>
-                        <option value="12">XII</option>
+                        <option value="X">X</option>
+                        <option value="XI">XI</option>
+                        <option value="XII">XII</option>
                     </select>
                     <select id="input-jurusan" class="input" name="jurusan">
-                        <option value="10">RPL</option>
-                        <option value="11">TKJ</option>
-                        <option value="12">TJA</option>
+                        <option value="RPL">RPL</option>
+                        <option value="TKJ">TKJ</option>
+                        <option value="TJA">TJA</option>
                     </select>
                     <select id="input-kelaske" class="input" name="kelaske">
-                        <option value="10">1</option>
-                        <option value="11">2</option>
-                        <option value="12">3</option>
-                        <option value="12">4</option>
+                        <option value="1">1</option>
+                        <option value="2">2</option>
+                        <option value="3">3</option>
+                        <option value="4">4</option>
                     </select>
                     <select id="input-gender" class="input" name="gender">
                         <option value="10">L</option>
@@ -58,6 +58,8 @@
                         <input class="input" type="text" id="update-nis" disabled>
                         <p>Nama :</p>                        
                         <input class="input" type="text" id="update-nama">
+                        <p>Gender :</p>                        
+                        <input class="input" type="text" id="update-gender">
                         <p>Kelas :</p>                        
                         <input class="input" type="text" id="update-kelas">
                 </form>
@@ -69,7 +71,7 @@
         <script src="https://cdn.datatables.net/1.10.16/js/jquery.dataTables.min.js"></script>
         <script src="https://cdn.datatables.net/1.10.16/js/dataTables.bootstrap.min.js"></script>
         <script type="text/javascript">
-            $(document).ready(function(){
+            function tableSiswa(){
                 $('#table').DataTable({
                     "ajax" : "http://localhost/epko/class/admin/getsiswa.php",
                     "columns" : [
@@ -79,11 +81,14 @@
                         { "data" : "kelas" },
                         { mRender : 
                             function (data, type, row) {
-                                    return '<button id='+row[1]+' onclick="()" class="button">Edit</button> <button onclick="deleteSiswa('+row[1]+')" class="button">Delete</button>'
+                                    return '<button id='+row[0]+' onclick="onModalEditSiswa(\''+row[1]+'\',\''+row[2]+'\',\''+row[3]+'\',\''+row[4]+'\')" class="button">Edit</button> <button onclick="deleteSiswa('+row[0]+')" class="button">Delete</button>'
                             }
                          }                       
                     ]
                 });
+            }
+            $(document).ready(function(){
+                tableSiswa();
             });
         </script>
 

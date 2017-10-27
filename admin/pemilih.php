@@ -12,13 +12,16 @@
         <button onclick="inputSearchSiswa()" class="button">Input</button>
         <br>
         <br>
+        <div class="add-users">
         <input id="input-nis" class="input" type="text" disabled placeholder="NIS">
         <input id="input-nama" class="input" type="text" disabled placeholder="Name">
-        <input id="input-kelas" class="input" type="text" disabled placeholder="Gender">
+        <input id="input-gender" class="input" type="text" disabled placeholder="Gender">
         <input id="input-kelas" class="input" type="text" disabled placeholder="Kelas">
         <input id="input-username" class="input" type="text" placeholder="Username">
         <input id="input-password" class="input" type="text" placeholder="Password">
         <button class="button" onclick="addUsers()">Add</button>
+        </div>
+       
 </div>
 </div>
 
@@ -89,7 +92,7 @@
                          },
                         { mRender : 
                             function (data, type, row) {
-                                    return '<button id='+row[1]+' onclick="()" class="button">Edit</button> <button onclick="deleteSiswa('+row[1]+')" class="button">Delete</button>'
+                                    return '<button id='+row[0]+' onclick="onModalEditUsers('+row[1]+')" class="button">Edit</button> <button onclick="deleteUsers('+row[0]+')" class="button">Delete</button>'
                             }
                          }                       
                     ]

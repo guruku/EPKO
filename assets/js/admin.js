@@ -14,10 +14,13 @@ var dataListSiswa = document.getElementById('input-search');
 var inputNis = document.getElementById('input-nis');
 var inputNama = document.getElementById('input-nama');
 var inputKelas = document.getElementById('input-kelas');
+var inputJurusan = document.getElementById('input-jurusan');
+var inputKelaske = document.getElementById('input-kelaske');
+var inputGender = document.getElementById('input-gender');
 
 var inputVisi = document.getElementById('input-visi');
 var inputMisi = document.getElementById('input-misi');
-var inputImgpath = document.getElementById('input-imgpath');
+// var inputImgpath = document.getElementById('input-imgpath');
 
 var inputUsername = document.getElementById('input-username');
 var inputPassword = document.getElementById('input-password');
@@ -31,8 +34,9 @@ var tableDataKetua = document.getElementById('table-data-ketua');
 var tableDataWakilKetua = document.getElementById('table-data-wakilketua');
 
 //update
-var updateNis = document.getElementById('update-nis');;
-var updateNama = document.getElementById('update-nama');;
+var updateNis = document.getElementById('update-nis');
+var updateNama = document.getElementById('update-nama');
+var updateGender = document.getElementById('update-gender');
 var updateKelas = document.getElementById('update-kelas'); 
 
 var updatePassword = document.getElementById('update-password'); 
@@ -43,9 +47,10 @@ var pageContent = document.getElementById('page-content');
 
 //modal
 
-function onModalEditSiswa(nis,name,kelas){
+function onModalEditSiswa(nis,name,gender,kelas){
     updateNis.value = nis;
     updateNama.value = name;
+    updateGender.value = gender;
     updateKelas.value = kelas;
     modalEditSiswa.style.display = "block";
 }
@@ -77,20 +82,22 @@ function onModalCalon(action){
 // insert
 
 function addSiswa(){
-    var param = "nis="+ inputNis.value +"&name="+ inputNama.value +"&kelas="+ inputKelas.value;
+    var param = "nis="+ inputNis.value +"&name="+ inputNama.value +"&kelas="+ inputKelas.value +" "+inputJurusan.value +" "+inputKelaske.value +"&gender="+ inputGender.value;
     var xhttp = new XMLHttpRequest();
     xhttp.open("POST", "../class/admin/insertsiswa.php", true);
     xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
     xhttp.onreadystatechange = function() {
       if (this.readyState == 4 && this.status == 200) {
         dataJSON = JSON.parse(this.responseText);
-        if(dataJSON.status == "true"){
-            alert('Data Berhasil di tambahkan');
+        if(dataJSON.status == true){
+            alert(dataJSON.message);                        
+            // alert('Data Berhasil di tambahkan');
+            location.reload();
         }
         else{
             alert(dataJSON.message);            
         }
-        tableSiswa();
+        // tableSiswa();
       }
     };
     xhttp.send(param);
@@ -104,38 +111,44 @@ function addUsers(){
     xhttp.onreadystatechange = function() {
       if (this.readyState == 4 && this.status == 200) {
         dataJSON = JSON.parse(this.responseText);
-        if(dataJSON.status == "true"){
-            alert('Data Berhasil di tambahkan');
+        if(dataJSON.status == true){
+            alert(dataJSON.message);    
+            location.reload();            
+            // alert('Data Berhasil di tambahkan');
         }
         else{
             alert(dataJSON.message);            
         }
-        tableUsers();
+        // tableUsers();
       }
     };
     xhttp.send(param);
 }
 
-function addCalon(){
-    var param = "calon="+inputCalon[1].value+"&nis="+inputNis.value+"&visi="+inputVisi.value+"&misi="+inputMisi.value+"&imgpath="+inputImgpath.value;
-    var xhttp = new XMLHttpRequest();
-    xhttp.open("POST", "../class/admin/insertcalon.php", true);
-    xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
-    xhttp.onreadystatechange = function() {
-      if (this.readyState == 4 && this.status == 200) {
-        dataJSON = JSON.parse(this.responseText);
-        if(dataJSON.status == "true"){
-            alert('Data Berhasil di tambahkan');
-        }
-        else{
-            alert(dataJSON.message);            
-        }
-        tableCalonKetua();
-        tableCalonWakilKetua();
-      }
-    };
-    xhttp.send(param);
-}
+// function addCalon(){
+
+//     var formData = new FormData();
+//     formData.append("myFile", document.getElementById("myFileField").files[0]);
+
+//     var param = "calon="+inputCalon[1].value+"&nis="+inputNis.value+"&visi="+inputVisi.value+"&misi="+inputMisi.value;
+//     var xhttp = new XMLHttpRequest();
+//     xhttp.open("POST", "../class/admin/insertcalon.php", true);
+//     xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded", "");
+//     xhttp.onreadystatechange = function() {
+//       if (this.readyState == 4 && this.status == 200) {
+//         dataJSON = JSON.parse(this.responseText);
+//         if(dataJSON.status == "true"){
+//             alert('Data Berhasil di tambahkan');
+//         }
+//         else{
+//             alert(dataJSON.message);            
+//         }
+//         tableCalonKetua();
+//         tableCalonWakilKetua();
+//       }
+//     };
+//     xhttp.send(formData);
+// }
 
 
 // delete
@@ -150,12 +163,13 @@ function deleteSiswa(id){
         xhttp.onreadystatechange = function() {
           if (this.readyState == 4 && this.status == 200) {
             dataJSON = JSON.parse(this.responseText);
-            if(dataJSON.status == "true"){
-                alert('Data Berhasil di hapus');
-                onModalEditSiswaClose();
+            if(dataJSON.status == true){
+                alert(dataJSON.message);                         
+                location.reload();
             }
             else{
-                alert(dataJSON.message);            
+                alert(dataJSON.message);         
+                // console.log(dataJSON.status);                
             }
             // tableSiswa();
           }
@@ -174,13 +188,14 @@ function deleteUsers(id){
         xhttp.onreadystatechange = function() {
           if (this.readyState == 4 && this.status == 200) {
             dataJSON = JSON.parse(this.responseText);
-            if(dataJSON.status == "true"){
+            if(dataJSON.status == true){
                 alert('Data Berhasil di hapus');
+                location.reload();
             }
             else{
                 alert(dataJSON.message);            
             }
-            tableUsers();
+            // tableUsers();
           }
         };
         xhttp.send(param);
@@ -213,20 +228,20 @@ function deleteCalon(calon,id){
 // update
 
 function updateSiswa(){
-    var param = "name="+ updateNama.value +"&kelas="+ updateKelas.value+"&nis="+ updateNis.value;
+    var param = "name="+ updateNama.value +"&gender="+updateGender.value+"&kelas="+ updateKelas.value+"&nis="+ updateNis.value;
     var xhttp = new XMLHttpRequest();
     xhttp.open("POST", "../class/admin/updatesiswa.php", true);
     xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
     xhttp.onreadystatechange = function() {
       if (this.readyState == 4 && this.status == 200) {
         dataJSON = JSON.parse(this.responseText);
-        if(dataJSON.status == "true"){
+        if(dataJSON.status == true){
             alert('Data Berhasil di Update');
+            location.reload();
         }
         else{
             alert(dataJSON.message);            
         }
-        tableSiswa();
       }
     };
     xhttp.send(param);
@@ -240,13 +255,15 @@ function updateUsers(){
     xhttp.onreadystatechange = function() {
       if (this.readyState == 4 && this.status == 200) {
         dataJSON = JSON.parse(this.responseText);
-        if(dataJSON.status == "true"){
-            alert('Data Berhasil di Update');
+        if(dataJSON.status == true){
+            // alert('Data Berhasil di Update');
+            alert(dataJSON.message);                        
+            // location.reload();
         }
         else{
             alert(dataJSON.message);            
         }
-        tableUsers();
+        // tableUsers();
       }
     };
     xhttp.send(param);
@@ -285,6 +302,7 @@ function inputSearchSiswa(){
                 inputNis.value = dataSiswa[0].nis;
                 inputNama.value = dataSiswa[0].name;
                 inputKelas.value = dataSiswa[0].kelas;
+                inputGender.value = dataSiswa[0].gender;
             }
             else{
                 inputNis.value = 'no data';
@@ -318,51 +336,51 @@ function getrowstable(data){
 }
 
 // table
-function tableSiswa(page){
-    var xmlhttp = new XMLHttpRequest();
-    xmlhttp.onreadystatechange = function() {
-        if (this.readyState == 4 && this.status == 200) {
-            dataSiswa = JSON.parse(this.responseText);
-            tableData.innerHTML = "<tr><th>No</th><th>NIS</th><th>Nama</th><th>Kelas</th><th>Action</th></tr>";
-            var no = 1;
-            if (dataSiswa.length > 0){
-                for (var index = 0; index < dataSiswa.length; index++) {
-                    tableData.innerHTML += '<tr><td>'+no+'</td><td>'+dataSiswa[index].nis+'</td><td>'+dataSiswa[index].name+'</td><td>'+dataSiswa[index].kelas+'</td><td><span onclick="onModalEditSiswa('+dataSiswa[index].nis+',\''+dataSiswa[index].name+'\','+dataSiswa[index].kelas+')" class="link">Edit</span> / <span class="link tx-red" id="'+dataSiswa[index].id+'" onclick="deleteSiswa(this.id)">Delete</span></td></tr>';
-                    no++;
-                }
-                totalData.innerHTML = dataSiswa.length;
-                return true;
-            }
-            else{
-            }
-        }
-    };
-    xmlhttp.open("GET", "../class/admin/pagging.php?page="+page+"&data=siswa", true);
-    xmlhttp.send();
-}
+// function tableSiswa(page){
+//     var xmlhttp = new XMLHttpRequest();
+//     xmlhttp.onreadystatechange = function() {
+//         if (this.readyState == 4 && this.status == 200) {
+//             dataSiswa = JSON.parse(this.responseText);
+//             tableData.innerHTML = "<tr><th>No</th><th>NIS</th><th>Nama</th><th>Kelas</th><th>Action</th></tr>";
+//             var no = 1;
+//             if (dataSiswa.length > 0){
+//                 for (var index = 0; index < dataSiswa.length; index++) {
+//                     tableData.innerHTML += '<tr><td>'+no+'</td><td>'+dataSiswa[index].nis+'</td><td>'+dataSiswa[index].name+'</td><td>'+dataSiswa[index].kelas+'</td><td><span onclick="onModalEditSiswa('+dataSiswa[index].nis+',\''+dataSiswa[index].name+'\','+dataSiswa[index].kelas+')" class="link">Edit</span> / <span class="link tx-red" id="'+dataSiswa[index].id+'" onclick="deleteSiswa(this.id)">Delete</span></td></tr>';
+//                     no++;
+//                 }
+//                 totalData.innerHTML = dataSiswa.length;
+//                 return true;
+//             }
+//             else{
+//             }
+//         }
+//     };
+//     xmlhttp.open("GET", "../class/admin/pagging.php?page="+page+"&data=siswa", true);
+//     xmlhttp.send();
+// }
 
-function tableUsers(){
-    var xmlhttp = new XMLHttpRequest();
-    xmlhttp.onreadystatechange = function() {
-        if (this.readyState == 4 && this.status == 200) {
-            dataUsers = JSON.parse(this.responseText);
-            tableData.innerHTML = "<tr><th>No</th><th>NIS</th><th>Nama</th><th>Kelas</th><th>Username</th><th>Password</th><th>Action</th></tr>";
-            var no = 1;
-            if (dataUsers.length > 0){
-                for (var index = 0; index < dataUsers.length; index++) {
-                    tableData.innerHTML += '<tr><td>'+no+'</td><td>'+dataUsers[index].nis_siswa+'</td><td>'+dataUsers[index].name+'</td><td>'+dataUsers[index].kelas+'</td><td>'+dataUsers[index].username+'</td><td>***</td><td><span class="link" onclick="onModalEditUsers(\''+dataUsers[index].nis_siswa+'\')">Edit</span> / <span id="'+dataUsers[index].id+'" onclick="deleteUsers(this.id)" class="link tx-red">Delete</span></td></tr>';
-                    no++;
-                }
-                totalData.innerHTML = dataUsers.length;
-                return true;
-            }
-            else{
-            }
-        }
-    };
-    xmlhttp.open("GET", "../class/admin/getusers.php", true);
-    xmlhttp.send();
-}
+// function tableUsers(){
+//     var xmlhttp = new XMLHttpRequest();
+//     xmlhttp.onreadystatechange = function() {
+//         if (this.readyState == 4 && this.status == 200) {
+//             dataUsers = JSON.parse(this.responseText);
+//             tableData.innerHTML = "<tr><th>No</th><th>NIS</th><th>Nama</th><th>Kelas</th><th>Username</th><th>Password</th><th>Action</th></tr>";
+//             var no = 1;
+//             if (dataUsers.length > 0){
+//                 for (var index = 0; index < dataUsers.length; index++) {
+//                     tableData.innerHTML += '<tr><td>'+no+'</td><td>'+dataUsers[index].nis_siswa+'</td><td>'+dataUsers[index].name+'</td><td>'+dataUsers[index].kelas+'</td><td>'+dataUsers[index].username+'</td><td>***</td><td><span class="link" onclick="onModalEditUsers(\''+dataUsers[index].nis_siswa+'\')">Edit</span> / <span id="'+dataUsers[index].id+'" onclick="deleteUsers(this.id)" class="link tx-red">Delete</span></td></tr>';
+//                     no++;
+//                 }
+//                 totalData.innerHTML = dataUsers.length;
+//                 return true;
+//             }
+//             else{
+//             }
+//         }
+//     };
+//     xmlhttp.open("GET", "../class/admin/getusers.php", true);
+//     xmlhttp.send();
+// }
 
 function tableCalonKetua(){
     var xmlhttp = new XMLHttpRequest();

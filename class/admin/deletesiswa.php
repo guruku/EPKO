@@ -10,7 +10,7 @@ if(isset($_POST['id'])){
         echo json_encode($status,true);
     }
     else{
-        $status = ["status"=>true,"message"=> $admin->error];
+        $status = ["status"=>false,"message"=> $admin->error];
         echo json_encode($status,true);
     }
 }

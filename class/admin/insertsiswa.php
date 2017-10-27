@@ -4,8 +4,9 @@ require_once "admin.php";
 if(isset($_POST['nis'])){
     $nis = $_POST['nis'];
     $name = $_POST['name'];
+    $gender = $_POST['gender'];    
     $kelas = $_POST['kelas'];
-    $siswa = $admin->insertsiswa($nis,$name,$kelas);
+    $siswa = $admin->insertsiswa($nis,$name,$gender,$kelas);
     if($siswa == true)
     {
         $status = ["status"=>true,"message"=>"Data berhasil di tambahkan"];

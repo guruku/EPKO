@@ -44,18 +44,25 @@ class admin extends core{
     }
 
     // insert
-    public function insertsiswa($nis,$name,$kelas){
+    public function insertsiswa($nis,$name,$gender,$kelas){
         $this->table = "siswa";
-        $value = "?,?,?,?";
-        $data = ['',$nis,$name,$kelas];
+        $value = "?,?,?,?,?";
+        $data = ['',$nis,$name,$gender,$kelas];
         return $this->insert($value,$data);
     }
 
     public function insertusers($nis,$username,$password){
         $password = password_hash($password,PASSWORD_DEFAULT);
+        if (!empty($_SERVER['HTTP_CLIENT_IP'])) {
+            $ip = $_SERVER['HTTP_CLIENT_IP'];
+        } elseif (!empty($_SERVER['HTTP_X_FORWARDED_FOR'])) {
+            $ip = $_SERVER['HTTP_X_FORWARDED_FOR'];
+        } else {
+            $ip = $_SERVER['REMOTE_ADDR'];
+        }
         $this->table = "users";
-        $value = "?,?,?,?,?";
-        $data = ["",$nis,$username,$password,1];
+        $value = "?,?,?,?,?,?";
+        $data = ["",$nis,$username,$password,1,$ip];
         return $this->insert($value,$data);
     }
 
@@ -66,6 +73,7 @@ class admin extends core{
         else if($calon == "wakilketua"){
             $this->table = "calon_wakilketua";            
         }
+        
         $value = "?,?,?,?,?";
         $data = ["",$nis,$imgpath,$visi,$misi];
         return $this->insert($value,$data);
@@ -73,10 +81,10 @@ class admin extends core{
 
     //update
 
-    public function updatesiswa($name,$kelas,$nis){
+    public function updatesiswa($name,$gender,$kelas,$nis){
         $this->table = "siswa";
-        $set = "name = ?, kelas= ? where nis = ?";
-        $data = [$name, $kelas, $nis];
+        $set = "name = ?, gender = ?, kelas= ? where nis = ?";
+        $data = [$name, $gender, $kelas, $nis];
         return $this->update($set,$data);
     }
 

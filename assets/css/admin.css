@@ -132,6 +132,10 @@ main{
 .add form input{
     width: 30%;
 }
+
+.add-users input{
+    width :170px;
+}
 /* end add */
 /* data */
 .filter{

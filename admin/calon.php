@@ -57,27 +57,31 @@
 
 <div id="modal-input" class="modal">
         <div id="modal-content" class="modal-content">
-        <h3 class="modal-title">Input calon <span class="input-calon"></span></h3>
+        <h3 class="modal-title" id="modal-title">Input calon <span class="input-calon"></span></h3>
                 <span class="button" id="button-close" onclick="onModalCalon('close');">&times;</span>
                 <p style="clear : both;">Search Siswa :</p>
                         <input id="search-siswa" name="search" style="display:inline-block" class="input" type="text" list="input-search" onkeyup="getSiswa()">
                         <datalist id="input-search">
                         </datalist>           
                         <button class="button" type="text" onclick="inputSearchSiswa()">Input</button>
-                        <input type="hidden" class="input-calon" value="">
-                        <p style="clear : both;">NIS :</p>                        
-                        <input class="input" type="text" disabled id="input-nis">
-                        <p>Nama :</p>                        
+                    <form action="../class/admin/insertcalon.php" method="POST" enctype="multipart/form-data">
+                        <!-- <p style="clear : both;">NIS :</p>           -->
+                        <input name="calon" type="hidden" class="input-calon" value="">           
+                        <input name="nis" class="input" type="hidden" id="input-nis">
+                        <p style="clear : both;">Nama :</p>                        
                         <input class="input" type="text" disabled id="input-nama">
+                        <p>Gender :</p>       
+                        <input class="input" type="text" disabled id="input-gender">
                         <p>Kelas :</p>       
                         <input class="input" type="text" disabled id="input-kelas">
                         <p style="clear : both;">Photo :</p>
-                        <input name="photo" class="input" type="text" placeholder="" id="input-imgpath">
+                        <input name="imgpath" class="input" type="file" placeholder="" id="input-imgpath">
                         <p>Visi :</p>
-                        <textarea class="input" cols="30" rows="10" id="input-visi"></textarea>
+                        <textarea name="visi" class="input" cols="30" rows="10" id="input-visi"></textarea>
                         <p>Misi :</p>
-                        <textarea class="input" cols="30" rows="10" id="input-misi"></textarea>
-                <button class="button" onclick="addCalon()">Add</button>
+                        <textarea name="misi" class="input" cols="30" rows="10" id="input-misi"></textarea>
+                        <button class="button" type="submit">Add</button>
+                    </form>
         </div>
 </div>
 <script>

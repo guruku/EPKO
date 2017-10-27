@@ -9,7 +9,7 @@ if($tanggal > 24){
         include('more.php');
     }
     else{
-        include('less.php');
+        include('more.php');
     }
 }
 else{
