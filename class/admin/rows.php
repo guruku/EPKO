@@ -1,6 +1,6 @@
 <?php 
-require_once "admin.php";
-
+require_once __DIR__ ."/admin.php";
+if($admin->ceklogin_admin() == true){
 $admin->rows = 20;
 if(isset($_GET['data'])){
     $data = $_GET['data'];
@@ -22,4 +22,5 @@ if(isset($_GET['data'])){
     }
     echo json_encode($rows,true);
 };
+}
 ?>

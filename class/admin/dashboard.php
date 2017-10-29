@@ -1,6 +1,6 @@
 <?php 
-require_once "admin.php";
-
+require_once __DIR__ ."/admin.php";
+if($admin->ceklogin_admin() == true){
     $ketua = [];
     foreach ($admin->getcalon('ketua') as $value) {
        $ketua[] =  ['name' => $value['name'], 'count' => $admin->getcountcalonresult($value['nis_siswa'])];
@@ -20,4 +20,5 @@ require_once "admin.php";
     
     $data = ['datatb' => $datatbcount, 'ketua' => $ketua,'wakilketua' => $wakilketua];
     echo json_encode($data,true);
+}
 ?>

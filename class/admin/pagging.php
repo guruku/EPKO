@@ -1,5 +1,6 @@
 <?php 
-require_once "admin.php";
+require_once __DIR__ ."/admin.php";
+if($admin->ceklogin_admin() == true){
 if(isset($_GET['page'])){
     $page = $_GET['page'];
     $data = $_GET['data'];
@@ -17,6 +18,7 @@ if(isset($_GET['page'])){
 
     $admin->rows = 20;
     echo json_encode($admin->pagging($page,$table),true);
+}
 }
 // echo 'yoho';
 ?>

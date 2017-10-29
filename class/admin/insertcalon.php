@@ -1,6 +1,6 @@
 <?php 
-require_once "admin.php";
-
+require_once __DIR__ ."/admin.php";
+if($admin->ceklogin_admin() == true){
 if(isset($_POST['nis'])){
     $target_dir = "img/";
     $target_file = $target_dir . basename($_FILES["imgpath"]["name"]);
@@ -76,5 +76,6 @@ if(isset($_POST['nis'])){
         }
     }
 
+}
 }
 ?>

@@ -1,6 +1,6 @@
 <?php 
-require_once "admin.php";
-
+require_once __DIR__ ."/admin.php";
+if($admin->ceklogin_admin() == true){
 if(isset($_POST['nis'])){
     $nis = $_POST['nis'];
     $password = $_POST['password'];
@@ -14,5 +14,6 @@ if(isset($_POST['nis'])){
         $status = ["status"=>true,"message"=> $admin->error];
         echo json_encode($status,true);
     }
+}
 }
 ?>

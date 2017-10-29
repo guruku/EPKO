@@ -1,6 +1,6 @@
 <?php
 require_once __DIR__ ."/admin.php";
-
+// if($admin->ceklogin_admin() == true){
 if(isset($_POST['username'])){
     if($admin->signin($_POST['username'],$_POST['password']) == true){
         // echo "berhasil";
@@ -10,4 +10,5 @@ if(isset($_POST['username'])){
         echo $admin->error;
     }
 }
+// }
 ?>

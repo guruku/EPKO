@@ -517,7 +517,7 @@ function dashboardResult(){
             }
 
             dasWakilKetua.innerHTML = "";
-            for (var index = 0; index < dataResult.ketua.length; index++) {
+            for (var index = 0; index < dataResult.wakilketua.length; index++) {
                 dasWakilKetua.innerHTML += "<p>"+dataResult.wakilketua[index].name+" : "+dataResult.wakilketua[index].count+"</p>";
             }
         }
