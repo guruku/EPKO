@@ -47,9 +47,14 @@ if(isset($_POST['nis'])){
             $imgpath = $_FILES["imgpath"]["name"];
             $visi = $_POST['visi'];
             $misi = $_POST['misi'];
-            $admin->insertcalon($calon,$nis,$imgpath,$visi,$misi);
-
-            header('Location:http://localhost/epko/admin/calon.php');
+            $calon = $admin->insertcalon($calon,$nis,$imgpath,$visi,$misi);
+            if($calon == true)
+            {
+                header('Location:http://localhost/epko/admin/calon.php');                
+            }
+            else{
+                echo $admin->error;
+            }
             // if($admin->insertcalon($calon,$nis,$imgpath,$visi,$misi) == true){
             //     echo "sukses";
             // }

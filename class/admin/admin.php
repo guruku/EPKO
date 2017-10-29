@@ -12,12 +12,15 @@ class admin extends core{
         $data = ['%'.$search.'%','%'.$search.'%'];
         return $this->read($where,$data);
     }
+    
     public function getsiswaall(){
         $this->table = "siswa";
         $where = "WHERE 1";
         $data = null;
         return $this->read($where,$data);
     }
+
+  
 
     public function getusers(){
         $query = "SELECT users.id,users.nis_siswa,siswa.name,siswa.kelas,users.username from users, siswa where users.nis_siswa = siswa.nis";
@@ -41,6 +44,34 @@ class admin extends core{
         $where = "WHERE 1";
         $data = null;
         return $this->read($where,$data);
+    }
+
+    public function getcount($table){
+        $this->table = $table;
+        $data = null;
+        $where = "WHERE 1";
+        return $this->read_count($where,$data);
+    }
+
+    // public function getcountcalon($table){
+    //     $this->table = $table;
+    //     $data = null;
+    //     $where = "WHERE 1";
+    //     return $this->read_count($where,$data);
+    // }
+
+    // public function getcalon($calon){
+    //     $this->table = $calon;
+    //     $where = "WHERE 1";
+    //     $data = null;
+    //     return $this->read($where,$data);
+    // }
+
+    public function getcountcalonresult($nis){
+        $this->table = "result";
+        $where = "WHERE nis_calon_ketua = ? or nis_calon_wakilketua = ?";
+        $data = [$nis,$nis];
+        return $this->read_count($where,$data);
     }
 
     // insert
@@ -73,7 +104,7 @@ class admin extends core{
         else if($calon == "wakilketua"){
             $this->table = "calon_wakilketua";            
         }
-        
+
         $value = "?,?,?,?,?";
         $data = ["",$nis,$imgpath,$visi,$misi];
         return $this->insert($value,$data);
@@ -103,8 +134,8 @@ class admin extends core{
         else if($calon == "calon_wakilketua"){
             $this->table = "calon_wakilketua";            
         }
-        $set = "imgpath = ?, visi= ?,misi = ? where nis = ?";
-        $data = [$name, $kelas, $nis];
+        $set = "imgpath = ?, visi= ?,misi = ? where nis_siswa = ?";
+        $data = [$imgpath,$visi, $misi, $nis];
         return $this->update($set,$data);
     }
     // delete

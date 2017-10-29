@@ -84,6 +84,30 @@
                     </form>
         </div>
 </div>
+<div id="modal-input-update" class="modal">
+        <div id="modal-content" class="modal-content">
+        <h3 class="modal-title" id="modal-title">Edit data <span class="input-calon"></span></h3>
+                <span class="button" id="button-close" onclick="onModalCalon('close');">&times;</span>
+                    <form action="../class/admin/updatecalon.php" method="POST" enctype="multipart/form-data">
+                        <!-- <p style="clear : both;">NIS :</p>           -->
+                        <input name="calon" type="hidden" class="input-calon" value="">           
+                        <input name="nis" class="input" type="hidden" id="update-nis">
+                        <!-- <p style="clear : both;">Nama :</p>                        
+                        <input class="input" type="text" disabled id="update-nama">
+                        <p>Gender :</p>       
+                        <input class="input" type="text" disabled id="update-gender">
+                        <p>Kelas :</p>       
+                        <input class="input" type="text" disabled id="update-kelas"> -->
+                        <p style="clear : both;">Photo :</p>
+                        <input name="imgpath" class="input" type="file" placeholder="" id="input-imgpath">
+                        <p>Visi :</p>
+                        <textarea name="visi" class="input" cols="30" rows="10" id="update-visi"></textarea>
+                        <p>Misi :</p>
+                        <textarea name="misi" class="input" cols="30" rows="10" id="update-misi"></textarea>
+                        <button class="button" type="submit">Update Data</button>
+                    </form>
+        </div>
+</div>
 <script>
     window.onload = function(){
         tableCalonKetua();

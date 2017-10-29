@@ -4,6 +4,7 @@
 var modalEditSiswa =  document.getElementById('modal-edit-siswa');
 var modalEditUsers =  document.getElementById('modal-edit-users');
 var modalCalon = document.getElementById('modal-input');
+var modalCalonUpdate = document.getElementById('modal-input-update');
 
 var calonValue = document.getElementById('calon-value');
 
@@ -38,11 +39,15 @@ var updateNis = document.getElementById('update-nis');
 var updateNama = document.getElementById('update-nama');
 var updateGender = document.getElementById('update-gender');
 var updateKelas = document.getElementById('update-kelas'); 
+var updateVisi = document.getElementById('update-visi'); 
+var updateMisi = document.getElementById('update-misi'); 
 
 var updatePassword = document.getElementById('update-password'); 
 
 var pageContent = document.getElementById('page-content');
 
+var dasKetua = document.getElementById('das-ketua');
+var dasWakilKetua = document.getElementById('das-wakilketua');
 //end INIT
 
 //modal
@@ -64,7 +69,7 @@ function onModalEditUsers(nis){
     updateNis.value = nis;
     modalEditUsers.style.display = "block";
 }
-function onModalEditUsersClose(){
+function onModalEditUsersClose(calon){   
     modalEditUsers.style.display = "none";
 }
 
@@ -76,7 +81,20 @@ function onModalCalon(action){
     }
     else if(action == 'close'){
         modalCalon.style.display = 'none';
+        modalCalonUpdate.style.display = "none";
     }   
+}
+
+function onModalEditCalon(nis,calon,visi,misi){
+    inputCalon[2].innerHTML = nis;
+    inputCalon[3].value = calon; 
+    // updateNama.value = nama;
+    // updateGender.value = gender;
+    // updateKelas.value = kelas;
+    updateNis.value = nis;
+    updateVisi.value = visi;
+    updateMisi.value = misi;
+    modalCalonUpdate.style.display = "block";
 }
 
 // insert
@@ -391,7 +409,7 @@ function tableCalonKetua(){
             var no = 1;
             if (dataCalon.length > 0){
                 for (var index = 0; index < dataCalon.length; index++) {
-                    tableDataKetua.innerHTML += "<tr><td>"+no+"</td><td>"+dataCalon[index].imgpath+"</td><td>"+dataCalon[index].nis_siswa+"</td><td>"+dataCalon[index].name+"</td><td>"+dataCalon[index].kelas+"</td><td>"+dataCalon[index].visi+"</td><td>"+dataCalon[index].misi+"</td><td><span class='link' onclick=''>Edit</span> / <span id='"+dataCalon[index].id+"' onclick='deleteCalon(\"calon_ketua\",this.id)' class='link tx-red'>Delete</span></td></tr>";
+                    tableDataKetua.innerHTML += '<tr><td>'+no+'</td><td>'+dataCalon[index].imgpath+'</td><td>'+dataCalon[index].nis_siswa+'</td><td>'+dataCalon[index].name+'</td><td>'+dataCalon[index].kelas+'</td><td>'+dataCalon[index].visi.substring(0,15) + ".."+'</td><td>'+dataCalon[index].misi.substring(0,15) + ".."+'</td><td><span class="link" onclick="onModalEditCalon('+dataCalon[index].nis_siswa+',\'calon_ketua\',\''+dataCalon[index].visi+'\',\''+dataCalon[index].misi+'\')">Edit</span> / <span id="'+dataCalon[index].id+'" onclick="deleteCalon(\'calon_ketua\',this.id)" class="link tx-red">Delete</span></td></tr>';
                     no++;
                 }
                 // totalData.innerHTML = dataUsers.length;
@@ -414,7 +432,9 @@ function tableCalonWakilKetua(){
             var no = 1;
             if (dataCalon.length > 0){
                 for (var index = 0; index < dataCalon.length; index++) {
-                    tableDataWakilKetua.innerHTML += "<tr><td>"+no+"</td><td>"+dataCalon[index].imgpath+"</td><td>"+dataCalon[index].nis_siswa+"</td><td>"+dataCalon[index].name+"</td><td>"+dataCalon[index].kelas+"</td><td>"+dataCalon[index].visi+"</td><td>"+dataCalon[index].misi+"</td><td><span class='link' onclick=''>Edit</span> / <span id='"+dataCalon[index].id+"' onclick='deleteCalon(\"calon_wakilketua\",this.id)' class='link tx-red'>Delete</span></td></tr>";
+                    // if(dataCalon[index].visi.length > 15) dataCalon[index].visi = dataCalon[index].visi.substring(0,15) + "..";
+                    // if(dataCalon[index].misi.length > 15) dataCalon[index].misi = dataCalon[index].misi.substring(0,15) + "..";
+                    tableDataWakilKetua.innerHTML += '<tr><td>'+no+'</td><td>'+dataCalon[index].imgpath+'</td><td>'+dataCalon[index].nis_siswa+'</td><td>'+dataCalon[index].name+'</td><td>'+dataCalon[index].kelas+'</td><td>'+dataCalon[index].visi.substring(0,15) + ".."+'</td><td>'+dataCalon[index].misi.substring(0,15) + ".."+'</td><td><span class="link" onclick="onModalEditCalon('+dataCalon[index].nis_siswa+',\'calon_wakilketua\',\''+dataCalon[index].visi+'\',\''+dataCalon[index].misi+'\')">Edit</span> / <span id="'+dataCalon[index].id+'" onclick="deleteCalon(\'calon_wakilketua\',this.id)" class="link tx-red">Delete</span></td></tr>';
                     no++;
                 }
                 // totalData.innerHTML = dataUsers.length;
@@ -448,5 +468,60 @@ function tableResult(){
         }
     };
     xmlhttp.open("GET", "../class/admin/getresult.php", true);
+    xmlhttp.send();
+}
+
+//dashboard
+
+function piechart(){
+    var chart = new CanvasJS.Chart("chartContainer", {
+animationEnabled: true,
+title: {
+    text: "Calon Ketua OSIS"
+},
+data: [{
+    type: "pie",
+    startAngle: 240,
+    yValueFormatString: "##0.00\"%\"",
+    indexLabel: "{label} {y}",
+    dataPoints: [
+        {y: 79.45, label: "Google"},
+        {y: 7.31, label: "Bing"},
+        {y: 7.06, label: "Baidu"},
+          {y: 7.06, label: "Baidu"}
+    ]
+}]
+    });
+    chart.render();
+}
+
+var dashJumSiswa = document.getElementById('das-jumsiswa');
+var dasRegister = document.getElementById('das-register');
+var dasBlumRegister = document.getElementById('das-blumregister');
+var dasMemilih = document.getElementById('das-memilih');
+var dasBlumMemilih = document.getElementById('das-blummemilih');
+function dashboardResult(){
+    var xmlhttp = new XMLHttpRequest();
+    xmlhttp.onreadystatechange = function() {
+        if (this.readyState == 4 && this.status == 200) {
+            dataResult = JSON.parse(this.responseText);
+            dashJumSiswa.innerHTML = dataResult.datatb.siswa;
+            dasRegister.innerHTML = dataResult.datatb.users;
+            dasBlumRegister.innerHTML = dataResult.datatb.siswa-dataResult.datatb.users;
+            dasMemilih.innerHTML = dataResult.datatb.result;
+            dasBlumMemilih.innerHTML = dataResult.datatb.users-dataResult.datatb.result;
+
+            dasKetua.innerHTML = "";
+            for (var index = 0; index < dataResult.ketua.length; index++) {
+                dasKetua.innerHTML += "<p>"+dataResult.ketua[index].name+" : "+dataResult.ketua[index].count+"</p>";
+            }
+
+            dasWakilKetua.innerHTML = "";
+            for (var index = 0; index < dataResult.ketua.length; index++) {
+                dasWakilKetua.innerHTML += "<p>"+dataResult.wakilketua[index].name+" : "+dataResult.wakilketua[index].count+"</p>";
+            }
+        }
+    };
+    xmlhttp.open("GET", "../class/admin/dashboard.php", true);
     xmlhttp.send();
 }

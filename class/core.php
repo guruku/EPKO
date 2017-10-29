@@ -48,7 +48,7 @@ class core extends dbconfig{
         }
         catch (PDOException $e){
             // echo "Koneksi Error :".$e->getMessage();
-            $this->error = "Gagal untuk mengupdate data";
+            $this->error = $query;
             return false;
         }
     }
@@ -100,25 +100,25 @@ class core extends dbconfig{
     }
 
     //PAGE
-    public function read_limit($where,$start,$end){
-        try{
-            $query = "SELECT * FROM $this->table $where limit :start , :end";
-            $result = $this->connection->prepare($query);
-            $result->bindValue(':start',$start,PDO::PARAM_INT);
-            $result->bindValue(':end',$end,PDO::PARAM_INT);
-            $result->execute();
-            $rows = [];
-            while($row = $result->fetchAll()){
-                $rows = $row;
-            }
-            return $rows;
-        }
-        catch (PDOException $e){
-            // echo "Koneksi Error :".$e->getMessage();
-            $this->error = "Gagal untuk mendapatkan data";
-            // return $query;
-        }
+    // public function read_limit($where,$start,$end){
+    //     try{
+    //         $query = "SELECT * FROM $this->table $where limit :start , :end";
+    //         $result = $this->connection->prepare($query);
+    //         $result->bindValue(':start',$start,PDO::PARAM_INT);
+    //         $result->bindValue(':end',$end,PDO::PARAM_INT);
+    //         $result->execute();
+    //         $rows = [];
+    //         while($row = $result->fetchAll()){
+    //             $rows = $row;
+    //         }
+    //         return $rows;
+    //     }
+    //     catch (PDOException $e){
+    //         // echo "Koneksi Error :".$e->getMessage();
+    //         $this->error = "Gagal untuk mendapatkan data";
+    //         // return $query;
+    //     }
         
-    }
+    // }
 }   
 ?>

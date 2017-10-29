@@ -302,3 +302,11 @@ table{
 .active{
     background-color: #d83030;
 }
+/* end datatables */
+
+/* dashboard */
+.dashboard-result p{
+    display:inline-block;
+    width:20%;
+}
+/* end dashboard */
