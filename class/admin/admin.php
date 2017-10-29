@@ -1,5 +1,5 @@
 <?php
-require_once "../core.php";
+require_once __DIR__ ."/../core.php";
 
 
 class admin extends core{
@@ -158,28 +158,66 @@ class admin extends core{
         return $this->delete($id);
     }
 
-    // pagging
+    // // pagging
 
-    public $rows;
+    // public $rows;
 
-    public function getrows($table){
-        $this->table = $table;
-        $rows = $this->rows;
-        $where = "WHERE 1";
-        $data = null;
-        return  ceil($this->read_count($where,$data)/$this->rows);
+    // public function getrows($table){
+    //     $this->table = $table;
+    //     $rows = $this->rows;
+    //     $where = "WHERE 1";
+    //     $data = null;
+    //     return  ceil($this->read_count($where,$data)/$this->rows);
+    // }
+
+    // public function pagging($page,$table){
+    //     $start = ($page-1)*$this->rows;
+    //     if($page == 1){
+    //         $start = 0;
+    //     }
+    //     $end = $this->rows;
+
+    //     $this->table = $table;
+    //     $where = "WHERE 1";
+    //     return $this->read_limit($where,$start,$end);
+    // }
+
+    //login
+
+    public function signin($username,$password){
+        $query = "SELECT * FROM admin WHERE username = ?";
+        $result = $this->connection->prepare($query);
+        $result->execute([$username]);
+        $getdata = $result->fetchAll();
+        if($result->rowCount() > 0){
+            $verify = password_verify($password, $getdata[0]['password']);
+            if($verify == true){
+                $_SESSION['admin_username'] = $getdata[0]['username'];
+                return true;
+            }
+            else{
+                $this->error = "Password yang anda masukan salah :)";
+                return false;
+            }
+        }
+        else{
+            $this->error = "Username tidak ada :(";
+            return false;
+        }
     }
 
-    public function pagging($page,$table){
-        $start = ($page-1)*$this->rows;
-        if($page == 1){
-            $start = 0;
+    public function ceklogin_admin(){
+        if(isset($_SESSION['admin_username'])){
+            return true;
         }
-        $end = $this->rows;
+        else{
+            return false;
+        }
+    }
 
-        $this->table = $table;
-        $where = "WHERE 1";
-        return $this->read_limit($where,$start,$end);
+    public function signout(){
+        session_unset();
+        session_destroy();
     }
 }
 

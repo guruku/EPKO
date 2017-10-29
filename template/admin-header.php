@@ -1,3 +1,9 @@
+<?php 
+if($admin->ceklogin_admin() == false){
+    header("location:signin.php");
+}
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -14,10 +20,10 @@
         </div>
         <div class="">
             <div class="username">
-                <p>Sign Out</p>
+                <p onclick="location.href='../class/admin/signout.php'">Sign Out</p>
             </div>
             <div class="signout">
-                <p>Hello,Username</p>
+                <p>Hello, <?php echo $_SESSION['admin_username'] ?></p>
             </div>
         </div>
     </header>

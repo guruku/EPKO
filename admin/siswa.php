@@ -1,3 +1,4 @@
+<?php require_once "../class/admin/admin.php"?>
 <?php $nav = "siswa" ?>
 <?php require_once "../template/admin-header.php" ?>
 
